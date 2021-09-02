@@ -1,0 +1,27 @@
+class Solution {
+    public int arrayNesting(int[] nums) {
+        // if(nums[0] == 0) return 1;
+        if(nums.length == 1) return 1;
+        
+        
+        int max = 0;
+        boolean[] arr = new boolean[nums.length];
+        
+        for(int i = 0; i < nums.length; i++){
+            int count = 1;
+            
+            int inf = nums[i];
+            
+            while(true){
+                inf = nums[inf];
+                arr[inf] = true;
+                count++;
+                if(inf == nums[i]) break;
+            }
+            count--;
+            if( count > max) max = count;
+        }
+        
+        return max;
+    }
+}
