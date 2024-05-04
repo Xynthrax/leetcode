@@ -1,0 +1,14 @@
+function numRescueBoats(people: number[], limit: number): number {
+    people.sort((a, b) => a - b);
+    let min = people.length;
+
+    while(people.length > 0) {
+        const p1 = people.pop();
+        if (p1 + people[0] <= limit) {
+            const p2 = people.shift();
+            min--;
+        }
+    }
+
+    return min;
+};
