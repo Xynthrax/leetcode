@@ -1,0 +1,44 @@
+/**
+ * Definition for singly-linked list.
+ * class ListNode {
+ *     val: number
+ *     next: ListNode | null
+ *     constructor(val?: number, next?: ListNode | null) {
+ *         this.val = (val===undefined ? 0 : val)
+ *         this.next = (next===undefined ? null : next)
+ *     }
+ * }
+ */
+
+function doubleIt(head: ListNode | null): ListNode | null {
+let newLinkedListStr = ''
+
+    while(head){
+        newLinkedListStr = head.val + newLinkedListStr
+        head = head.next
+    }
+
+    let newLinkedListHead = null
+    let rem = 0
+    for(const str of newLinkedListStr){
+        let val = Number(str)*2 + rem
+        rem = 0
+        if(val && (val/10 >= 1)){
+            val = val - 10
+            rem = 1
+        }
+        const newNode = new ListNode(val)
+        newNode.next = newLinkedListHead
+        newLinkedListHead = newNode
+    }
+
+    if(rem){
+        const newNode = new ListNode(rem)
+        newNode.next = newLinkedListHead
+        newLinkedListHead = newNode
+    }
+
+
+
+    return newLinkedListHead 
+};
