@@ -1,0 +1,39 @@
+function countTrapezoids(points: number[][]): number {
+    const mod = 1000000007n;
+    let map = new Map<number, bigint>();
+
+    for( let i = 0; i < points.length; i++){
+        let y = points[i][1];
+        if(map.get(y)){
+            map.set(y, map.get(y) + 1n);
+        }else{
+            map.set(y, 1n);  
+        }
+    }
+
+    let arr: bigint[] = [];
+
+    for( let [key,value] of map) {
+        if(value < 2n) continue;
+        arr.push( value * (value - 1n) / 2n % mod);
+    }
+    let res = 0n, sum = 0n;
+    for(let a of arr){
+        res = (res + a*sum) %mod;
+        sum = (sum + a) % mod
+    }
+    // console.log(map, arr, res);
+    return Number(res % mod);
+// [-100000000,-100000000],
+
+// a,b,c,d,e
+// a*b + a*c + a*d + a*e + b*c + b*d + b*e + c*d+ c*e + d*e
+// a ( b + c + d + e) +
+// b ( c + d + e) +
+// c ( d + e) +
+// d ( e )
+
+
+
+// [-100000000, 100000000]
+};
