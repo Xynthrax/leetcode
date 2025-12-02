@@ -1,0 +1,32 @@
+function fillCups(amount: number[]): number {
+   
+   let count = 0;
+
+   if (amount[0] == 0 && amount[1] == 0 && amount[2] == 0) return 0;
+
+   const sortArr = () => {
+    amount.sort( (a,b) => b-a);
+   }
+    sortArr();
+   while ( !(amount[0] == 0 && amount[1] == 0)){
+
+    
+
+    // console.log(amount);
+
+    let a = amount[0];
+    let b = amount[1];
+
+    if( a - 1 >= 0){
+        amount[0]--;
+    }
+    if( b - 1 >= 0){
+        amount[1]--;
+    }
+
+    count++;
+    sortArr();
+
+   }
+   return count;
+};
