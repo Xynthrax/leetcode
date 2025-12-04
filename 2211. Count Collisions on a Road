@@ -1,0 +1,29 @@
+function countCollisions(directions: string): number {
+
+    let ans = 0;
+    let farLeft = true;
+    let farRight = true;
+    let tmpRight = 0;
+
+    for(let i of directions){
+        if ( i == 'L'){
+            if(farLeft) continue;
+            ans+=tmpRight;
+            tmpRight = 0;
+
+            ans++;
+        }else{
+            if(farLeft) farLeft = false;
+            if( i == 'R'){
+                if(farRight) tmpRight++;
+            }
+            if( i == 'S'){
+                ans+=tmpRight;
+                tmpRight = 0;
+            }
+        }
+        // console.log(i);
+    }
+    
+    return ans
+};
