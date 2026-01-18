@@ -1,0 +1,45 @@
+function evalRPN(tokens: string[]): number {
+
+    const plus = "+";
+    const minus = "-";
+    const multiply = "*";
+    const divide = "/";
+
+    const arr = ['+','-','*','/'];
+    const stack = [];
+
+    for(let x of tokens){
+        const idx = arr.indexOf(x);
+
+        if(idx == -1){
+            stack.push(Number(x));
+        }else{
+            const num2 = stack.pop();
+            const num1 = stack.pop();
+            let ans;
+            switch(idx){
+                case 0:
+                    // console.log("+");
+                    ans = num1 + num2;
+                    break;
+                case 1:
+                    // console.log("-");
+                    ans = num1 - num2;
+                    break;
+                case 2:
+                    // console.log("*");
+                    ans = num1 * num2;
+                    break;
+                case 3:
+                    // console.log("/");
+                    ans = Math.trunc(num1 / num2);
+                    break;
+                default:
+                    console.log('error');
+
+            }
+            stack.push(ans);
+        }
+    }   
+    return Number(stack[0]);
+};
