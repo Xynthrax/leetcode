@@ -1,0 +1,13 @@
+function minOperations(s: string): number {
+
+    let countOne = 0;
+    let countZero = 0;
+
+    for(let i =0; i < s.length; i++){
+        if(Number(s[i]) == i%2) countZero++;
+        if(Number(s[i]) == (i+1)%2) countOne++;
+    }
+
+    return Math.min(countZero,countOne)
+    
+};
