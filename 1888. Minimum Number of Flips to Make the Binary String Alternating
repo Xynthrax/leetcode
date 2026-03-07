@@ -1,0 +1,36 @@
+function minFlips(s: string): number {
+
+    let customString = s + s;
+    let altStringOne = '';
+    let altStringZero= '';
+    let ans = Number.MAX_SAFE_INTEGER;
+    const len = s.length;
+
+    for(let i = 0; i < len*2; i++){
+        altStringZero += `${(i)%2}`;
+        altStringOne += `${(i+1)%2}`;
+    }
+    let ansOne  = 0;
+    let ansZero = 0;
+    // console.log(customString,altStringZero,altStringOne);
+    for(let i = 0; i < len*2; i++){
+        // console.log(customString[i] !== altStringZero, customString[i],altStringZero);
+        // console.log(customString[i] !== altStringOne, customString[i],altStringOne);
+        if(customString[i] != altStringZero[i]) ansZero++;
+        if(customString[i] != altStringOne[i]) ansOne++;
+        if( i >= len){
+            if(altStringZero[i-len] != customString[i-len]) ansZero--; 
+            if(altStringOne[i-len]  != customString[i-len]) ansOne--; 
+        }
+        // console.log(ansOne,ansZero,ans);
+        if(i >= len-1) ans = Math.min(ansOne,ansZero,ans);
+    }
+    return ans;
+
+
+    // 111000111000 
+    
+    // 010101010101 
+    // 101010101010
+    
+};
