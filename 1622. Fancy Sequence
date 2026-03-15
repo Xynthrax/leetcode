@@ -1,0 +1,64 @@
+const mod = 1000000007n;
+
+class Fancy {
+
+    rawData = []
+
+    mult = 1n;
+    add = 0n;
+
+    constructor() {
+
+    }
+
+    append(val: number): void {
+        let raw = (BigInt( val ) - this.add) % mod;
+
+        raw = (raw + mod) % mod
+        raw = (raw * this.modInv(this.mult)) % mod;
+        this.rawData.push(raw)
+    }
+
+    addAll(inc: number): void {
+        this.add = (this.add + BigInt(inc) ) % mod;
+    }
+
+    multAll(m: number): void {
+        this.mult = (this.mult * BigInt(m)) % mod;
+        this.add = (this.add * BigInt(m)) % mod;
+    }
+
+    getIndex(idx: number): number {
+        if (this.rawData.length <= idx) return -1;
+
+        return Number((this.rawData[idx] * this.mult + this.add) % mod);
+    }
+
+    modPow = (a: bigint, b: bigint): bigint => {
+        let res = 1n;
+        a %= mod;
+
+        while (b > 0n) {
+            if (b & 1n) res = (res * a) % mod;
+
+            a = (a * a) % mod;
+            b = b >> 1n;
+        }
+
+        return res;
+    }
+
+    modInv = (x: bigint) : bigint => {
+        return this.modPow(x, mod - 2n);
+    }
+
+}
+
+/**
+ * Your Fancy object will be instantiated and called as such:
+ * var obj = new Fancy()
+ * obj.append(val)
+ * obj.addAll(inc)
+ * obj.multAll(m)
+ * var param_4 = obj.getIndex(idx)
+ */
