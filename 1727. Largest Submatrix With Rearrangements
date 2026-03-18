@@ -1,0 +1,25 @@
+function largestSubmatrix(matrix: number[][]): number {
+
+    const row = matrix.length;
+    const col = matrix[0].length;
+
+    let ans = 0;
+
+    for (let r = 0; r < row; r++) {
+        for (let c = 0; c < col; c++) {
+            if (matrix[r][c] > 0 && r > 0) {
+                matrix[r][c] += matrix[r - 1][c];
+            }
+        }
+
+        const sortedComputedCurrentRow = [...matrix[r]].sort((a, b) => b - a);
+
+        for (let [idx, val] of sortedComputedCurrentRow.entries()){
+            ans = Math.max(ans , (idx+1) * val);
+        }
+
+    }
+
+    return ans;
+
+};
