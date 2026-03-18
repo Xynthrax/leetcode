@@ -1,0 +1,27 @@
+function countSubmatrices(grid: number[][], k: number): number {
+
+    let ans = 0;
+
+    for (let i = 0; i < grid.length; i++) {
+
+        for (let j = 0; j < grid[0].length; j++) {
+
+            const top = i > 0 ? grid[i - 1][j] : 0;
+            const left = j > 0 ? grid[i][j - 1] : 0;
+            const topLeft = (i > 0 && j > 0) ? grid[i - 1][j - 1] : 0;
+
+            grid[i][j] = top + left - topLeft + grid[i][j];
+
+            if (grid[i][j] <= k) ans++;
+
+        }
+    }
+
+    // console.log(grid)
+    return ans;
+
+    // 1   10
+    // 7   2
+    // 9   1
+    // 4   1
+};
