@@ -1,0 +1,30 @@
+function minAbsDiff(grid: number[][], k: number): number[][] {
+
+    const result = Array.from({ length: grid.length - k + 1 }, () =>
+        new Array<number>(grid[0].length - k + 1).fill(0)
+    );
+
+    for (let row = grid.length - k; row >= 0; row--) {
+        for (let col = grid[0].length - k; col >= 0; col--) {
+            const arr = [];
+            for (let i = row; i < row + k; i++) {
+                for (let j = col; j < col + k; j++) {
+                    arr.push(grid[i][j]);
+                }
+            }
+
+            arr.sort((a, b) => Number(a) - Number(b));
+            let min = Number.MAX_SAFE_INTEGER;
+
+            for (let i = 1; i < arr.length; i++) {
+                if (arr[i] !== arr[i - 1])
+                    min = Math.min(min, Math.abs(arr[i] - arr[i - 1]))
+            }
+
+            if (min < Number.MAX_SAFE_INTEGER) result[row][col] = min;
+        }
+    }
+
+    return result;
+
+};
