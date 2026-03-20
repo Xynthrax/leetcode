@@ -1,0 +1,24 @@
+function dailyTemperatures(temperatures: number[]): number[] {
+
+    const len: number = temperatures.length;
+
+    const results: number[] = new Array(len).fill(0);
+
+    const stack: number[] = [];
+
+    for (let [idx, temp] of temperatures.entries()) {
+
+        while (stack.length > 0 && temp > temperatures[stack[stack.length - 1]]) {
+
+            const s = stack.pop()!;
+
+            results[s] = idx - s;
+
+        }
+
+        stack.push(idx);
+
+    }
+
+    return results;
+};
