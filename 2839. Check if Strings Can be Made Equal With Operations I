@@ -1,0 +1,11 @@
+function canBeEqual(s1: string, s2: string): boolean {
+
+    if(s1 == s2) return true;
+
+    const joiner = (a,b) => {
+        return [a,b].sort().join('')
+    }
+
+    return (joiner(s1[0],s1[2]) == joiner(s2[0],s2[2])) && (joiner(s1[1],s1[3]) == joiner(s2[1],s2[3]))
+
+};
