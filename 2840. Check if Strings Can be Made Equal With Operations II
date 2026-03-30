@@ -1,0 +1,21 @@
+function checkStrings(s1: string, s2: string): boolean {
+    
+    const word = (w: string): string => {
+
+        let even = "";
+        let odd  = "";
+
+        for(const [idx, elm] of w.split("").entries()){
+
+            if(idx % 2 == 0){
+                even += elm;
+            }else{
+                odd += elm;
+            }
+        }
+        return even.split('').sort().join('') + odd.split('').sort().join('');
+    }
+
+    return word(s1) == word(s2);
+
+};
