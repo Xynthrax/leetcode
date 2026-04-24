@@ -1,0 +1,15 @@
+function furthestDistanceFromOrigin(moves: string): number {
+    const map = new Map<string, number>();
+
+    for (let e of moves) {
+        // console.log(e);
+        if (!map.has(e)) {
+            map.set(e, 1);
+        } else {
+            map.set(e, map.get(e) + 1);
+        }
+    }
+
+    return Math.abs( (map.get('L') ?? 0) - (map.get('R') ?? 0 )) + (map.get('_') ?? 0);
+
+};
