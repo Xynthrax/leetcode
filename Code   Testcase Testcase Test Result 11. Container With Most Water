@@ -1,0 +1,19 @@
+function maxArea(heights: number[]): number {
+    let left = 0;
+        let right = heights.length-1;
+        let maxArea = -1;
+
+        while( left < right ){
+            let area = (right - left) * (Math.min(heights[left], heights[right]));
+            console.log(area);
+            maxArea = Math.max(maxArea, area);
+
+            if( heights[left] < heights[right] ){
+                left++;
+            }else{
+                right--;
+            }
+        }
+
+        return maxArea;
+};
