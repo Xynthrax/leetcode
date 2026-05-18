@@ -1,0 +1,31 @@
+class Solution {
+    /**
+     * @param {number[]} nums
+     * @param {number} target
+     * @returns {number[][]}
+     */
+    combinationSum(nums: number[], target: number): number[][] {
+        const ans: number[][] = [];
+
+        nums.sort((a, b) => a - b);
+
+        const rec = (arr: number[], index: number, sum: number) => {
+            console.log(arr, index, sum);
+            if (sum === target) {
+                ans.push([...arr]);
+                return;
+            }
+
+            for (let i = index; i < nums.length; i++) {
+                if (sum + nums[i] > target) return;
+
+                arr.push(nums[i]);
+                rec([...arr], i, sum + nums[i]);
+                arr.pop();
+            }
+        };
+
+        rec([], 0, 0);
+        return ans;
+    }
+}
