@@ -1,0 +1,26 @@
+class Solution {
+    /**
+     * @param {number[][]} matrix
+     * @return {void}
+     */
+    rotate(matrix: number[][]): void {
+        let L = 0;
+        let R = matrix.length - 1;
+
+        // console.log(L ,R ,i)
+        while (L < R) {
+            // Log this to double check this:
+            for (let i = 0; i < R - L ; i++) {
+
+                let firstSquare = matrix[L][L+i];
+                matrix[L][L+i] = matrix[R-i][L];
+                matrix[R-i][L] = matrix[R][R-i];
+                matrix[R][R-i] = matrix[L+i][R];
+                matrix[L+i][R] = firstSquare;
+            }
+
+            L++;
+            R--;
+        }
+    }
+}
